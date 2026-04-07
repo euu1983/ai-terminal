@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Terminal — AI-Powered Mobile Control Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.6; }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+        /* Hero */
+        .hero { text-align: center; padding: 80px 0 60px; }
+        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero h1 span { color: #58a6ff; }
+        .hero p { font-size: 20px; color: #8b949e; max-width: 600px; margin: 0 auto 32px; }
+        .badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 14px; border: 1px solid #238636; color: #3fb950; margin-bottom: 24px; }
+
+        /* Features */
+        .features { padding: 60px 0; }
+        .features h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .feature-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 28px; }
+        .feature-card h3 { font-size: 18px; margin-bottom: 8px; color: #58a6ff; }
+        .feature-card p { font-size: 14px; color: #8b949e; }
+
+        /* Tech */
+        .tech { padding: 60px 0; }
+        .tech h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; text-align: center; }
+        .tech-item { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; }
+        .tech-item .label { font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+        .tech-item .value { font-size: 16px; margin-top: 6px; }
+
+        /* Architecture */
+        .arch { padding: 60px 0; text-align: center; }
+        .arch h2 { font-size: 32px; margin-bottom: 32px; }
+        .arch pre { display: inline-block; text-align: left; background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 32px; font-size: 14px; color: #8b949e; overflow-x: auto; }
+
+        /* CTA */
+        .cta { text-align: center; padding: 60px 0 80px; }
+        .cta p { font-size: 18px; color: #8b949e; margin-bottom: 24px; }
+        .cta a { display: inline-block; padding: 12px 32px; background: #58a6ff; color: #0d1117; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; }
+        .cta a:hover { background: #79b8ff; }
+        .cta .secondary { background: transparent; border: 1px solid #30363d; color: #e6edf3; margin-left: 12px; }
+        .cta .secondary:hover { border-color: #58a6ff; }
+
+        /* Footer */
+        footer { border-top: 1px solid #21262d; padding: 24px 0; text-align: center; font-size: 13px; color: #484f58; }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <div class="badge">Private Beta</div>
+            <h1><span>AI Terminal</span></h1>
+            <p>AI-powered mobile platform for intelligent automation. Orchestrate multiple AI models through voice and text, anywhere.</p>
+        </section>
+
+        <section class="features">
+            <h2>Core Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Multi-Agent Orchestration</h3>
+                    <p>Specialized AI agents with persistent memory, role-based task delegation, and real-time collaboration across sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Voice-First Interface</h3>
+                    <p>Real-time voice recognition and natural language interaction, designed for hands-free mobile operation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Intelligent Automation</h3>
+                    <p>Automated scheduling, health monitoring, cross-device communication, and smart task dispatching.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Model Flexibility</h3>
+                    <p>Seamlessly switch between cloud models (Claude, GPT, Gemini) and local models (Ollama) based on task and cost.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Team Collaboration</h3>
+                    <p>Built-in team engine for multi-agent orchestration with shared context and cross-team communication.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Secure by Design</h3>
+                    <p>Device-bound authentication, encrypted channels, tiered permissions, and operator privilege controls.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tech">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="label">Mobile App</div>
+                    <div class="value">Flutter / Dart</div>
+                </div>
+                <div class="tech-item">
+                    <div class="label">Backend</div>
+                    <div class="value">Node.js / WebSocket</div>
+                </div>
+                <div class="tech-item">
+                    <div class="label">AI Engine</div>
+                    <div class="value">Python Multi-Model</div>
+                </div>
+                <div class="tech-item">
+                    <div class="label">Cloud AI</div>
+                    <div class="value">AWS Bedrock / OpenRouter</div>
+                </div>
+                <div class="tech-item">
+                    <div class="label">Local AI</div>
+                    <div class="value">Ollama (Qwen, LLaMA)</div>
+                </div>
+                <div class="tech-item">
+                    <div class="label">Communication</div>
+                    <div class="value">WebSocket / MCP</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="arch">
+            <h2>Architecture</h2>
+            <pre>
+┌─────────────────────────────────────┐
+│         AI Terminal Mobile App       │
+│           (Flutter / Dart)           │
+├─────────────────────────────────────┤
+│       WebSocket Relay Server         │
+│           (Node.js)                  │
+├─────────────────────────────────────┤
+│         AI Agent Engine              │
+│  ┌─────────┬──────────┬───────────┐ │
+│  │  Role   │  Team    │  Shared   │ │
+│  │  Cards  │  Engine  │  Context  │ │
+│  └─────────┴──────────┴───────────┘ │
+├─────────────────────────────────────┤
+│   Cloud Models   │   Local Models   │
+│  (Bedrock/API)   │    (Ollama)      │
+└─────────────────────────────────────┘</pre>
+        </section>
+
+        <section class="cta">
+            <p>Currently in private beta. Interested in early access?</p>
+            <a href="mailto:contact@ai-terminal.org">Get in Touch</a>
+            <a href="https://github.com/euu1983/ai-terminal" class="secondary">View on GitHub</a>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2026 AI Terminal. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
