@@ -48,9 +48,19 @@
         /* Footer */
         footer { border-top: 1px solid #21262d; padding: 24px 0; text-align: center; font-size: 13px; color: #484f58; }
 
+        /* Install command box */
+        .install-box { max-width: 640px; margin: 0 auto 16px; }
+        .install-row { display: flex; align-items: stretch; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
+        .install-row code { flex: 1; padding: 12px 16px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 13px; color: #e6edf3; text-align: left; overflow-x: auto; white-space: nowrap; }
+        .install-row .copy-btn { padding: 0 16px; background: #21262d; color: #8b949e; border: none; border-left: 1px solid #30363d; cursor: pointer; font-size: 12px; transition: background 0.15s; font-family: inherit; }
+        .install-row .copy-btn:hover { background: #30363d; color: #e6edf3; }
+        .install-row .copy-btn.copied { color: #3fb950; }
+        .install-hint { font-size: 12px; color: #6e7681; text-align: center; }
+
         @media (max-width: 640px) {
             .hero h1 { font-size: 32px; }
             .hero p { font-size: 16px; }
+            .install-row code { font-size: 11px; padding: 10px 12px; }
         }
     </style>
 </head>
@@ -60,6 +70,17 @@
             <div class="badge">Private Beta</div>
             <h1><span>AI Terminal</span></h1>
             <p>AI-powered mobile platform for intelligent automation. Orchestrate multiple AI models through voice and text, anywhere.</p>
+            <div class="install-box">
+                <div class="install-row">
+                    <code id="install-sh">curl -fsSL https://get.ai-terminal.org/install.sh | bash</code>
+                    <button class="copy-btn" data-target="install-sh">Copy</button>
+                </div>
+                <div class="install-row">
+                    <code id="install-ps1">irm https://get.ai-terminal.org/install.ps1 | iex</code>
+                    <button class="copy-btn" data-target="install-ps1">Copy</button>
+                </div>
+                <p class="install-hint">macOS / Linux (top) · Windows PowerShell (bottom) · Auto-routed by region</p>
+            </div>
         </section>
 
         <section class="features">
@@ -155,5 +176,26 @@
             &copy; 2026 AI Terminal. All rights reserved.
         </div>
     </footer>
+
+    <script>
+        document.querySelectorAll('.copy-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var targetId = btn.getAttribute('data-target');
+                var text = document.getElementById(targetId).textContent;
+                navigator.clipboard.writeText(text).then(function() {
+                    var orig = btn.textContent;
+                    btn.textContent = 'Copied';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.textContent = orig;
+                        btn.classList.remove('copied');
+                    }, 1500);
+                }).catch(function() {
+                    btn.textContent = 'Failed';
+                    setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
