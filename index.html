@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Terminal — AI-Powered Mobile Control Platform</title>
+    <title>AI Terminal — Mobile-first terminal for AI coding agents</title>
+    <meta name="description" content="AI Terminal: mobile-first terminal designed for Claude Code &amp; Codex CLI. Multi-session tabs, AI-native keyboard, self-hosted relay support. Currently in Private Beta.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.6; }
@@ -13,8 +14,10 @@
         .hero { text-align: center; padding: 80px 0 60px; }
         .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
         .hero h1 span { color: #58a6ff; }
-        .hero p { font-size: 20px; color: #8b949e; max-width: 600px; margin: 0 auto 32px; }
+        .hero p { font-size: 20px; color: #8b949e; max-width: 640px; margin: 0 auto 32px; }
         .badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 14px; border: 1px solid #238636; color: #3fb950; margin-bottom: 24px; }
+        .hero-cta { display: inline-block; padding: 14px 32px; background: #58a6ff; color: #0d1117; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; }
+        .hero-cta:hover { background: #79b8ff; }
 
         /* Features */
         .features { padding: 60px 0; }
@@ -37,19 +40,11 @@
         .arch h2 { font-size: 32px; margin-bottom: 32px; }
         .arch pre { display: inline-block; text-align: left; background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 32px; font-size: 14px; color: #8b949e; overflow-x: auto; }
 
-        /* CTA */
-        .cta { text-align: center; padding: 60px 0 80px; }
-        .cta p { font-size: 18px; color: #8b949e; margin-bottom: 24px; }
-        .cta a { display: inline-block; padding: 12px 32px; background: #58a6ff; color: #0d1117; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; }
-        .cta a:hover { background: #79b8ff; }
-        .cta .secondary { background: transparent; border: 1px solid #30363d; color: #e6edf3; margin-left: 12px; }
-        .cta .secondary:hover { border-color: #58a6ff; }
-
-        /* Footer */
-        footer { border-top: 1px solid #21262d; padding: 24px 0; text-align: center; font-size: 13px; color: #484f58; }
-
-        /* Install command box */
-        .install-box { max-width: 640px; margin: 0 auto 16px; }
+        /* Install */
+        .install { padding: 60px 0; }
+        .install h2 { text-align: center; font-size: 32px; margin-bottom: 16px; }
+        .install p.lead { text-align: center; color: #8b949e; margin-bottom: 32px; }
+        .install-box { max-width: 720px; margin: 0 auto; }
         .install-row { display: flex; align-items: stretch; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
         .install-row code { flex: 1; padding: 12px 16px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 13px; color: #e6edf3; text-align: left; overflow-x: auto; white-space: nowrap; }
         .install-row .copy-btn { padding: 0 16px; background: #21262d; color: #8b949e; border: none; border-left: 1px solid #30363d; cursor: pointer; font-size: 12px; transition: background 0.15s; font-family: inherit; }
@@ -57,88 +52,86 @@
         .install-row .copy-btn.copied { color: #3fb950; }
         .install-hint { font-size: 12px; color: #6e7681; text-align: center; }
 
+        /* CTA */
+        .cta { text-align: center; padding: 60px 0 80px; }
+        .cta h2 { font-size: 28px; margin-bottom: 16px; }
+        .cta p { font-size: 16px; color: #8b949e; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta a { display: inline-block; padding: 12px 32px; background: #58a6ff; color: #0d1117; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; margin: 4px; }
+        .cta a:hover { background: #79b8ff; }
+        .cta .secondary { background: transparent; border: 1px solid #30363d; color: #e6edf3; }
+        .cta .secondary:hover { border-color: #58a6ff; }
+
+        /* Footer */
+        footer { border-top: 1px solid #21262d; padding: 32px 0; text-align: center; font-size: 13px; color: #484f58; }
+        footer a { color: #8b949e; text-decoration: none; margin: 0 12px; }
+        footer a:hover { color: #58a6ff; }
+        footer .copyright { margin-top: 16px; color: #484f58; }
+
         @media (max-width: 640px) {
             .hero h1 { font-size: 32px; }
             .hero p { font-size: 16px; }
             .install-row code { font-size: 11px; padding: 10px 12px; }
+            .arch pre { font-size: 12px; padding: 16px 20px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <section class="hero">
-            <div class="badge">Private Beta</div>
+            <div class="badge">Private Beta · Closed Testing</div>
             <h1><span>AI Terminal</span></h1>
-            <p>AI-powered mobile platform for intelligent automation. Orchestrate multiple AI models through voice and text, anywhere.</p>
-            <div class="install-box">
-                <div class="install-row">
-                    <code id="install-sh">curl -fsSL https://get.ai-terminal.org/install.sh | bash</code>
-                    <button class="copy-btn" data-target="install-sh">Copy</button>
-                </div>
-                <div class="install-row">
-                    <code id="install-ps1">irm https://get.ai-terminal.org/install.ps1 | iex</code>
-                    <button class="copy-btn" data-target="install-ps1">Copy</button>
-                </div>
-                <p class="install-hint">macOS / Linux (top) · Windows PowerShell (bottom) · Auto-routed by region</p>
-            </div>
+            <p>Mobile-first terminal for AI coding agents. Built for Claude Code &amp; Codex CLI. Multi-session tabs, AI-native keyboard, self-hosted relay support.</p>
+            <a href="#beta" class="hero-cta">Request Beta Invitation</a>
         </section>
 
         <section class="features">
             <h2>Core Features</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Multi-Agent Orchestration</h3>
-                    <p>Specialized AI agents with persistent memory, role-based task delegation, and real-time collaboration across sessions.</p>
+                    <h3>AI-Native Virtual Keyboard</h3>
+                    <p>esc, ctrl, arrow keys, tab, copy/paste, file upload, ^C — designed for AI prompts on mobile, not generic terminals.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Voice-First Interface</h3>
-                    <p>Real-time voice recognition and natural language interaction, designed for hands-free mobile operation.</p>
+                    <h3>Multi-Session Tabs</h3>
+                    <p>Jump between repos in one tap. Each tab is its own session with isolated state.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Intelligent Automation</h3>
-                    <p>Automated scheduling, health monitoring, cross-device communication, and smart task dispatching.</p>
+                    <h3>Self-Hosted Relay</h3>
+                    <p>Run your own relay server. Your code stays on your infrastructure — you choose what leaves it.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Model Flexibility</h3>
-                    <p>Seamlessly switch between cloud models (Claude, GPT, Gemini) and local models (Ollama) based on task and cost.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Team Collaboration</h3>
-                    <p>Built-in team engine for multi-agent orchestration with shared context and cross-team communication.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Secure by Design</h3>
-                    <p>Device-bound authentication, encrypted channels, tiered permissions, and operator privilege controls.</p>
+                    <h3>Works with Leading AI Coding Agents</h3>
+                    <p>Out-of-the-box support for Claude Code and OpenAI Codex CLI. No model lock-in.</p>
                 </div>
             </div>
         </section>
 
         <section class="tech">
-            <h2>Technology Stack</h2>
+            <h2>Technology</h2>
             <div class="tech-grid">
                 <div class="tech-item">
                     <div class="label">Mobile App</div>
-                    <div class="value">Flutter / Dart</div>
+                    <div class="value">Flutter</div>
                 </div>
                 <div class="tech-item">
-                    <div class="label">Backend</div>
-                    <div class="value">Node.js / WebSocket</div>
+                    <div class="label">Relay</div>
+                    <div class="value">Node.js · WebSocket</div>
                 </div>
                 <div class="tech-item">
-                    <div class="label">AI Engine</div>
-                    <div class="value">Python Multi-Model</div>
+                    <div class="label">Encryption</div>
+                    <div class="value">End-to-end</div>
                 </div>
                 <div class="tech-item">
-                    <div class="label">Cloud AI</div>
-                    <div class="value">AWS Bedrock / OpenRouter</div>
+                    <div class="label">Self-Hosted</div>
+                    <div class="value">Yes</div>
                 </div>
                 <div class="tech-item">
-                    <div class="label">Local AI</div>
-                    <div class="value">Ollama (Qwen, LLaMA)</div>
+                    <div class="label">Android</div>
+                    <div class="value">Closed Beta</div>
                 </div>
                 <div class="tech-item">
-                    <div class="label">Communication</div>
-                    <div class="value">WebSocket / MCP</div>
+                    <div class="label">iOS</div>
+                    <div class="value">TestFlight (soon)</div>
                 </div>
             </div>
         </section>
@@ -146,34 +139,44 @@
         <section class="arch">
             <h2>Architecture</h2>
             <pre>
-┌─────────────────────────────────────┐
-│         AI Terminal Mobile App       │
-│           (Flutter / Dart)           │
-├─────────────────────────────────────┤
-│       WebSocket Relay Server         │
-│           (Node.js)                  │
-├─────────────────────────────────────┤
-│         AI Agent Engine              │
-│  ┌─────────┬──────────┬───────────┐ │
-│  │  Role   │  Team    │  Shared   │ │
-│  │  Cards  │  Engine  │  Context  │ │
-│  └─────────┴──────────┴───────────┘ │
-├─────────────────────────────────────┤
-│   Cloud Models   │   Local Models   │
-│  (Bedrock/API)   │    (Ollama)      │
-└─────────────────────────────────────┘</pre>
+  Mobile App  ↔  WebSocket Relay  ↔  Your Mac/Linux daemon
+  (Flutter)         (Node.js,            (runs in tmux,
+                end-to-end encrypted)   pairs via QR code)
+                          ↑
+                Self-hosted or hosted
+                  — you choose</pre>
         </section>
 
-        <section class="cta">
-            <p>Currently in private beta. Interested in early access?</p>
-            <a href="mailto:contact@ai-terminal.org">Get in Touch</a>
+        <section class="install">
+            <h2>Install daemon on your computer</h2>
+            <p class="lead">One-line install. The daemon shows a QR code; scan it with the mobile app to pair.</p>
+            <div class="install-box">
+                <div class="install-row">
+                    <code id="install-sh">curl -fsSL https://dist.ai-terminal.org/install.sh | bash</code>
+                    <button class="copy-btn" data-target="install-sh">Copy</button>
+                </div>
+                <div class="install-row">
+                    <code id="install-ps1">irm https://dist.ai-terminal.org/install.ps1 | iex</code>
+                    <button class="copy-btn" data-target="install-ps1">Copy</button>
+                </div>
+                <p class="install-hint">macOS / Linux / WSL (top) · Windows PowerShell (bottom)</p>
+            </div>
+        </section>
+
+        <section class="cta" id="beta">
+            <h2>Closed Beta on Google Play</h2>
+            <p>iOS TestFlight coming soon. Email us with the Gmail address (or Apple ID, for iOS) you want on the testers list.</p>
+            <a href="mailto:contact@ai-terminal.org?subject=AI%20Terminal%20Closed%20Beta%20-%20Test%20Invitation%20Request">Request Invitation</a>
             <a href="https://github.com/euu1983/ai-terminal" class="secondary">View on GitHub</a>
         </section>
     </div>
 
     <footer>
         <div class="container">
-            &copy; 2026 AI Terminal. All rights reserved.
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="https://github.com/euu1983/ai-terminal">GitHub</a>
+            <a href="mailto:contact@ai-terminal.org">Contact</a>
+            <div class="copyright">&copy; 2026 AI Terminal</div>
         </div>
     </footer>
 
