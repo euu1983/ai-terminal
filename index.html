@@ -3,46 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Terminal — Mobile-first terminal for AI coding agents</title>
-    <meta name="description" content="AI Terminal: mobile-first terminal designed for Claude Code &amp; Codex CLI. Multi-session tabs, AI-native keyboard, self-hosted relay support. Currently in Private Beta.">
+    <title>AI Terminal — Run any AI coding agent from your phone</title>
+    <meta name="description" content="Run Claude Code, Codex, Gemini, OpenClaw, or any CLI from your phone. Install in seconds. Cross-platform. Encrypted by default. Currently in Private Beta.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: #e6edf3; line-height: 1.6; }
         .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 
         /* Hero */
-        .hero { text-align: center; padding: 80px 0 60px; }
-        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 16px; }
+        .hero { text-align: center; padding: 80px 0 40px; }
+        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 12px; }
         .hero h1 span { color: #58a6ff; }
-        .hero p { font-size: 20px; color: #8b949e; max-width: 640px; margin: 0 auto 32px; }
+        .hero h2 { font-size: 24px; font-weight: 500; color: #e6edf3; margin-bottom: 8px; }
+        .hero .tagline { font-size: 16px; color: #8b949e; max-width: 640px; margin: 0 auto 24px; }
         .badge { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 14px; border: 1px solid #238636; color: #3fb950; margin-bottom: 24px; }
-        .hero-cta { display: inline-block; padding: 14px 32px; background: #58a6ff; color: #0d1117; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; }
-        .hero-cta:hover { background: #79b8ff; }
+        .hero-cta { display: inline-block; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; margin: 4px; }
+        .hero-cta.primary { background: #58a6ff; color: #0d1117; }
+        .hero-cta.primary:hover { background: #79b8ff; }
+        .hero-cta.secondary { background: transparent; border: 1px solid #30363d; color: #e6edf3; }
+        .hero-cta.secondary:hover { border-color: #58a6ff; }
 
-        /* Features */
-        .features { padding: 60px 0; }
-        .features h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .feature-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 28px; }
-        .feature-card h3 { font-size: 18px; margin-bottom: 8px; color: #58a6ff; }
-        .feature-card p { font-size: 14px; color: #8b949e; }
-
-        /* Tech */
-        .tech { padding: 60px 0; }
-        .tech h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; text-align: center; }
-        .tech-item { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; }
-        .tech-item .label { font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
-        .tech-item .value { font-size: 16px; margin-top: 6px; }
-
-        /* Architecture */
-        .arch { padding: 60px 0; text-align: center; }
-        .arch h2 { font-size: 32px; margin-bottom: 32px; }
-        .arch pre { display: inline-block; text-align: left; background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 32px; font-size: 14px; color: #8b949e; overflow-x: auto; }
+        /* Pills */
+        .pills { padding: 20px 0 60px; text-align: center; }
+        .pill { display: inline-block; padding: 6px 14px; margin: 4px; background: #161b22; border: 1px solid #30363d; border-radius: 20px; font-size: 13px; color: #8b949e; }
+        .pill.brand { color: #58a6ff; }
 
         /* Install */
-        .install { padding: 60px 0; }
-        .install h2 { text-align: center; font-size: 32px; margin-bottom: 16px; }
+        .install { padding: 0 0 60px; }
+        .install h2 { text-align: center; font-size: 28px; margin-bottom: 16px; }
         .install p.lead { text-align: center; color: #8b949e; margin-bottom: 32px; }
         .install-box { max-width: 720px; margin: 0 auto; }
         .install-row { display: flex; align-items: stretch; background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
@@ -51,6 +39,20 @@
         .install-row .copy-btn:hover { background: #30363d; color: #e6edf3; }
         .install-row .copy-btn.copied { color: #3fb950; }
         .install-hint { font-size: 12px; color: #6e7681; text-align: center; }
+
+        /* Features */
+        .features { padding: 60px 0; }
+        .features h2 { text-align: center; font-size: 32px; margin-bottom: 48px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .feature-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 28px; }
+        .feature-card h3 { font-size: 18px; margin-bottom: 12px; color: #58a6ff; }
+        .feature-card p { font-size: 14px; color: #8b949e; margin-bottom: 8px; }
+        .feature-card p:last-child { margin-bottom: 0; }
+
+        /* Architecture */
+        .arch { padding: 60px 0; text-align: center; }
+        .arch h2 { font-size: 32px; margin-bottom: 32px; }
+        .arch pre { display: inline-block; text-align: left; background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 24px 32px; font-size: 14px; color: #8b949e; overflow-x: auto; }
 
         /* CTA */
         .cta { text-align: center; padding: 60px 0 80px; }
@@ -68,10 +70,11 @@
         footer .copyright { margin-top: 16px; color: #484f58; }
 
         @media (max-width: 640px) {
-            .hero h1 { font-size: 32px; }
-            .hero p { font-size: 16px; }
+            .hero h1 { font-size: 36px; }
+            .hero h2 { font-size: 18px; }
+            .hero .tagline { font-size: 14px; }
             .install-row code { font-size: 11px; padding: 10px 12px; }
-            .arch pre { font-size: 12px; padding: 16px 20px; }
+            .arch pre { font-size: 11px; padding: 16px 20px; }
         }
     </style>
 </head>
@@ -80,58 +83,60 @@
         <section class="hero">
             <div class="badge">Private Beta · Closed Testing</div>
             <h1><span>AI Terminal</span></h1>
-            <p>Mobile-first terminal for AI coding agents. Built for Claude Code &amp; Codex CLI. Multi-session tabs, AI-native keyboard, self-hosted relay support.</p>
-            <a href="#beta" class="hero-cta">Request Beta Invitation</a>
+            <h2>Run any AI coding agent from your phone</h2>
+            <p class="tagline">Install in seconds · Cross-platform · Encrypted</p>
+            <a href="#beta" class="hero-cta primary">Request Beta Invitation</a>
+            <a href="https://github.com/euu1983/ai-terminal" class="hero-cta secondary">View on GitHub</a>
+        </section>
+
+        <section class="pills">
+            <span class="pill brand">Claude Code</span>
+            <span class="pill brand">Codex</span>
+            <span class="pill brand">Gemini</span>
+            <span class="pill brand">OpenClaw</span>
+            <span class="pill">+ your stack</span>
+        </section>
+
+        <section class="install">
+            <h2>Install daemon on your computer</h2>
+            <p class="lead">One command. Scan a QR on your phone. Done.</p>
+            <div class="install-box">
+                <div class="install-row">
+                    <code id="install-sh">curl -fsSL https://get.ai-terminal.org/install.sh | bash</code>
+                    <button class="copy-btn" data-target="install-sh">Copy</button>
+                </div>
+                <div class="install-row">
+                    <code id="install-ps1">irm https://get.ai-terminal.org/install.ps1 | iex</code>
+                    <button class="copy-btn" data-target="install-ps1">Copy</button>
+                </div>
+                <p class="install-hint">macOS / Linux / WSL (top) · Windows PowerShell (bottom)</p>
+            </div>
         </section>
 
         <section class="features">
             <h2>Core Features</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>AI-Native Virtual Keyboard</h3>
-                    <p>esc, ctrl, arrow keys, tab, copy/paste, file upload, ^C — designed for AI prompts on mobile, not generic terminals.</p>
+                    <h3>Install in seconds</h3>
+                    <p>One command on your Mac/Linux/Windows. Scan a QR on your phone. Done.</p>
+                    <p>No SSH config. No port forwarding. No keys to manage.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Multi-Session Tabs</h3>
-                    <p>Jump between repos in one tap. Each tab is its own session with isolated state.</p>
+                    <h3>Bring your own agent</h3>
+                    <p>Claude Code, Codex, Gemini, OpenClaw — any CLI runs here.</p>
+                    <p>Need plain SSH or custom scripts? They work too.</p>
+                    <p>No model lock-in. No vendor walled garden.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Self-Hosted Relay</h3>
-                    <p>Run your own relay server. Your code stays on your infrastructure — you choose what leaves it.</p>
+                    <h3>Cross-platform support</h3>
+                    <p>Mobile: Android (Closed Beta), iOS TestFlight coming.</p>
+                    <p>Desktop daemon: macOS, Linux, Windows.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Works with Leading AI Coding Agents</h3>
-                    <p>Out-of-the-box support for Claude Code and OpenAI Codex CLI. No model lock-in.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="tech">
-            <h2>Technology</h2>
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <div class="label">Mobile App</div>
-                    <div class="value">Flutter</div>
-                </div>
-                <div class="tech-item">
-                    <div class="label">Relay</div>
-                    <div class="value">Node.js · WebSocket</div>
-                </div>
-                <div class="tech-item">
-                    <div class="label">Encryption</div>
-                    <div class="value">End-to-end</div>
-                </div>
-                <div class="tech-item">
-                    <div class="label">Self-Hosted</div>
-                    <div class="value">Yes</div>
-                </div>
-                <div class="tech-item">
-                    <div class="label">Android</div>
-                    <div class="value">Closed Beta</div>
-                </div>
-                <div class="tech-item">
-                    <div class="label">iOS</div>
-                    <div class="value">TestFlight (soon)</div>
+                    <h3>Encrypted, self-host optional</h3>
+                    <p>Encrypted in transit by default.</p>
+                    <p>Run your own relay for zero vendor trust if you want.</p>
+                    <p>Switch anytime — no migration headache.</p>
                 </div>
             </div>
         </section>
@@ -139,33 +144,14 @@
         <section class="arch">
             <h2>Architecture</h2>
             <pre>
-  Mobile App  ↔  WebSocket Relay  ↔  Your Mac/Linux daemon
-  (Flutter)         (Node.js,            (runs in tmux,
-                end-to-end encrypted)   pairs via QR code)
-                          ↑
-                Self-hosted or hosted
-                  — you choose</pre>
-        </section>
-
-        <section class="install">
-            <h2>Install daemon on your computer</h2>
-            <p class="lead">One-line install. The daemon shows a QR code; scan it with the mobile app to pair.</p>
-            <div class="install-box">
-                <div class="install-row">
-                    <code id="install-sh">curl -fsSL https://dist.ai-terminal.org/install.sh | bash</code>
-                    <button class="copy-btn" data-target="install-sh">Copy</button>
-                </div>
-                <div class="install-row">
-                    <code id="install-ps1">irm https://dist.ai-terminal.org/install.ps1 | iex</code>
-                    <button class="copy-btn" data-target="install-ps1">Copy</button>
-                </div>
-                <p class="install-hint">macOS / Linux / WSL (top) · Windows PowerShell (bottom)</p>
-            </div>
+  Mobile App (Flutter) ↔ WebSocket Relay ↔ Your Mac/Linux/Windows daemon
+                                  ↑
+                  Self-hosted or hosted, your choice</pre>
         </section>
 
         <section class="cta" id="beta">
             <h2>Closed Beta on Google Play</h2>
-            <p>iOS TestFlight coming soon. Email us with the Gmail address (or Apple ID, for iOS) you want on the testers list.</p>
+            <p>iOS TestFlight coming. Email us with the Gmail address (or Apple ID, for iOS) you want on the testers list.</p>
             <a href="mailto:contact@ai-terminal.org?subject=AI%20Terminal%20Closed%20Beta%20-%20Test%20Invitation%20Request">Request Invitation</a>
             <a href="https://github.com/euu1983/ai-terminal" class="secondary">View on GitHub</a>
         </section>
@@ -173,7 +159,7 @@
 
     <footer>
         <div class="container">
-            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/privacy.html">Privacy</a>
             <a href="https://github.com/euu1983/ai-terminal">GitHub</a>
             <a href="mailto:contact@ai-terminal.org">Contact</a>
             <div class="copyright">&copy; 2026 AI Terminal</div>
