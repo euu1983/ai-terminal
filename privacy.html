@@ -14,104 +14,130 @@ table { border-collapse: collapse; width: 100%; margin: 12px 0; }
 th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; vertical-align: top; }
 th { background: #f5f7fa; }
 code { background: #f5f7fa; padding: 2px 6px; border-radius: 3px; font-size: 13px; }
-.lang-switch { text-align: right; margin-bottom: 16px; }
-.lang-switch a { margin-left: 12px; color: #2c5282; text-decoration: none; }
 hr { margin: 40px 0; border: none; border-top: 1px solid #ddd; }
 .muted { color: #888; font-size: 13px; }
 </style>
 </head>
 <body>
 
-
-<!-- ============ English ============ -->
 <h1>AI Terminal — Privacy Policy</h1>
-<p class="muted">Last updated: 2026-04-28 · Applies to AI Terminal Android app (com.openclaw.aiterminal)</p>
+<p class="muted">Last updated: 2026-05-17 · Applies to AI Terminal iOS (org.aiterminal.app) and Android (org.aiterminal.app) apps (version 1.0.0+) and AI Terminal desktop daemon (Mac / Linux / Windows / WSL).</p>
 
 <h2>Who We Are</h2>
-<p>AI Terminal lets you remotely control terminal sessions on your computer (Claude Code / Cursor / Aider etc.) from your phone. This policy explains how we handle your data.</p>
+<p>AI Terminal lets you remotely control terminal sessions on your computer from your phone — including any AI coding agent (aider, Cursor CLI, Codex, etc.) or any PTY-based application. This policy explains how we handle your data.</p>
 
 <h2>Data We Collect</h2>
 <table>
 <tr><th>Data</th><th>Purpose</th><th>Stored</th></tr>
-<tr><td>Device identifier (Android ID)</td><td>Identify your phone for pairing persistence and 14-day free trial calculation</td><td>Relay server</td></tr>
-<tr><td>Public key (E2E encryption)</td><td>Establish encrypted channel between your phone and computer; relay cannot decrypt</td><td>Relay server + paired computer daemon</td></tr>
-<tr><td>Device name</td><td>Display in device management UI (e.g. "Xiaomi 13 Pro")</td><td>Paired computer daemon + local device</td></tr>
-<tr><td>FCM push token</td><td>Wake your computer via Google FCM when offline</td><td>Relay server</td></tr>
-<tr><td>Subscription status</td><td>Validate Google Play subscription</td><td>Relay server</td></tr>
+<tr><td>Device identifier (random UUID, not Android ID / IDFV)</td><td>Identify your phone for pairing persistence and trial calculation</td><td>Relay server</td></tr>
+<tr><td>Public key (end-to-end encryption)</td><td>Establish encrypted channel between your phone and computer; relay cannot decrypt</td><td>Relay server + paired computer daemon</td></tr>
+<tr><td>Device name</td><td>Display in device management UI (e.g. "iPhone 15 Pro" / "Xiaomi 13 Pro")</td><td>Paired computer daemon + local device</td></tr>
+<tr><td>Push notification token (FCM on Android, APNs on iOS)</td><td>Notify your phone when AI tasks finish or require approval</td><td>Relay server</td></tr>
+<tr><td>Subscription status</td><td>Validate App Store / Google Play subscription tier</td><td>Relay server</td></tr>
 </table>
 
 <h2>Optional Telemetry &amp; Feedback (Opt-in)</h2>
-<p>The following data is collected <strong>only if you enable it</strong> in <em>Settings → Privacy</em>. All three toggles are <strong>OFF by default</strong>; first-launch consent dialog respects your choice (declining keeps everything off).</p>
+<p>The following data is collected <strong>only if you enable it</strong> in <em>Settings → Privacy</em>. All toggles are <strong>OFF by default</strong>; first-launch consent dialog respects your choice (declining keeps everything off).</p>
 <table>
 <tr><th>Data</th><th>Purpose</th><th>Processor</th><th>Region</th></tr>
-<tr><td>Anonymous usage events (DAU, session length, feature use counters — no input content)</td><td>Understand how features are used to prioritize improvements</td><td>Google Firebase Analytics</td><td>Google global infrastructure</td></tr>
-<tr><td>Crash reports (stack trace, device state, sanitized — sensitive paths/keys/IPs scrubbed before send)</td><td>Identify and fix crashes</td><td>Google Firebase Crashlytics</td><td>Google global infrastructure</td></tr>
-<tr><td>User-submitted feedback (description, optional logs and screenshot, sanitized via 18+ regex client-side and again server-side)</td><td>Process user-reported bugs and suggestions</td><td>Our own feedback endpoint</td><td>Asia + Americas (low-latency multi-region)</td></tr>
+<tr><td>App usage analytics (screen views, button clicks)</td><td>Improve UI / feature prioritization</td><td>Firebase Analytics (Android), built-in (iOS)</td><td>Google global</td></tr>
+<tr><td>Crash reports (stack trace, device model, OS version)</td><td>Fix bugs faster</td><td>Self-hosted GlitchTip (Sentry-compatible)</td><td>Operator infrastructure</td></tr>
+<tr><td>In-app feedback (your text message, contact email if provided)</td><td>Respond to your feedback</td><td>Self-hosted backend</td><td>Operator infrastructure</td></tr>
 </table>
-<p><strong>Sanitization:</strong> Before any logs or feedback text leaves your device, the client runs a 18-rule regex scrub that strips: API keys (Anthropic, OpenAI, Google, AWS, GitHub PATs), JWT tokens, file paths containing usernames, private network IPs, email addresses, phone numbers. The same scrub runs server-side as a second layer.</p>
-<p><strong>Anonymity:</strong> Telemetry uses a randomly generated install UUID (not Android ID, not your device identifier). We do not link telemetry to your subscription or pairing identity. You can wipe and regenerate the install UUID at any time via <em>Settings → Privacy → Reset Telemetry ID</em>.</p>
+<p><strong>Anonymity:</strong> Telemetry uses a randomly generated install UUID (not Android ID / IDFV, not your device identifier). We do not link telemetry to your subscription or pairing identity. You can wipe and regenerate the install UUID at any time via <em>Settings → Privacy → Reset Telemetry ID</em>.</p>
 <p><strong>Opt-out:</strong> Toggle off in <em>Settings → Privacy</em> at any time. Past data submitted while opt-in cannot be retroactively recalled (technical limitation), but no further data will be sent.</p>
 
 <h2>Data We Do NOT Collect</h2>
 <ul>
-<li><strong>Terminal command content / AI conversation content</strong> — End-to-end encrypted (X25519 + AES-256-GCM). Only your phone and paired computer can decrypt. Neither the relay server nor we can see them.</li>
-<li><strong>Personal identity</strong> — We do not require account signup; we do not collect your name, email, phone number, or persistently log IP address (IP is only used for TCP connection setup).</li>
+<li><strong>Terminal session content</strong> — All commands, AI prompts, AI responses, and outputs are end-to-end encrypted between your computer daemon and phone. The relay only forwards encrypted bytes. We cannot read your sessions.</li>
+<li><strong>Your AI provider API keys</strong> — All API keys (for any AI provider) stay on your computer daemon. Never uploaded.</li>
+<li><strong>Files in your codebase or projects</strong> — Files stay on your computer. Only what you actively send via in-app file transfer is encrypted and routed through the relay.</li>
+<li><strong>Personal identity</strong> — We do not require account signup; we do not collect your name, phone number, or persistently log IP address (IP is only used for TCP connection setup).</li>
 <li><strong>Location</strong> — No GPS or network location collected.</li>
 <li><strong>Contacts / SMS / call logs</strong> — We don't request these permissions.</li>
 <li><strong>Advertising identifiers</strong> — No ad SDKs integrated.</li>
 </ul>
 
-<h2>Permission Usage</h2>
-<table>
-<tr><th>Permission</th><th>Purpose</th></tr>
-<tr><td>Camera (CAMERA)</td><td>Scan QR code on computer screen for first-time pairing. We do not record, upload, or store any camera content.</td></tr>
-<tr><td>Media / Files (READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE)</td><td>Used when you actively select an image or file to upload. We only read files you explicitly choose.</td></tr>
-<tr><td>Network (INTERNET / ACCESS_NETWORK_STATE)</td><td>Connect to relay server and your computer daemon.</td></tr>
-<tr><td>WiFi (ACCESS_WIFI_STATE / CHANGE_WIFI_MULTICAST_STATE)</td><td>LAN auto-discovery of your computer daemon (mDNS), so you don't have to type IP.</td></tr>
-<tr><td>Foreground Service (FOREGROUND_SERVICE / FOREGROUND_SERVICE_DATA_SYNC)</td><td>Background download service for large files, prevents Android from killing transfer.</td></tr>
-<tr><td>Boot completed (RECEIVE_BOOT_COMPLETED)</td><td>Auto-reconnect after device reboot (you can disable in system settings).</td></tr>
-<tr><td>Background (REQUEST_IGNORE_BATTERY_OPTIMIZATIONS / WAKE_LOCK)</td><td>Keep long connection alive for real-time push from computer.</td></tr>
-</table>
-
-<h2>Data Sharing</h2>
-<p>We do <strong>NOT</strong> share your data with advertisers, data brokers, or insurers.</p>
-<p><strong>Subprocessors</strong> (only if you opt in to telemetry/crash reports):</p>
+<h2>iOS Platform Permissions</h2>
+<p>The iOS app may request the following permissions on first use:</p>
 <ul>
-<li><strong>Google Firebase</strong> — Analytics and Crashlytics events. Subject to <a href="https://policies.google.com/privacy">Google's Privacy Policy</a>. You can opt out anytime in <em>Settings → Privacy</em>.</li>
-<li><strong>Our feedback endpoint</strong> — only the bug reports you explicitly submit. Stored on access-controlled servers, retained 90 days then auto-purged.</li>
+<li><strong>Camera</strong> (<code>NSCameraUsageDescription</code>): Scan the QR code shown by your desktop daemon to pair devices.</li>
+<li><strong>Photo Library — read</strong> (<code>NSPhotoLibraryUsageDescription</code>): Pick photos to send to your paired computer.</li>
+<li><strong>Photo Library — write</strong> (<code>NSPhotoLibraryAddUsageDescription</code>): Save received images to your local photo library.</li>
+<li><strong>Face ID / Touch ID</strong> (<code>NSFaceIDUsageDescription</code>): Verify your identity before approving a new device pairing or sensitive action — biometric data stays on your phone and is never transmitted.</li>
+<li><strong>Local Network</strong> (<code>NSLocalNetworkUsageDescription</code>): Discover your desktop daemon on the same Wi-Fi network for low-latency LAN mode.</li>
+<li><strong>Bonjour Services</strong> (<code>NSBonjourServices: _aiterminal._tcp</code>): mDNS-based local network device discovery.</li>
+<li><strong>Push Notifications (APNs)</strong>: Alert you when an AI task completes or requires approval (only if you opt-in).</li>
 </ul>
-<p>Exception: When legally required (e.g. court subpoena), we will disclose the minimum required by law.</p>
+<p>All permissions can be individually toggled in <em>iOS Settings → AI Terminal</em>. Disabling a permission makes the corresponding feature unavailable, but the app continues to function for other operations.</p>
+<p>AI Terminal also includes a <code>PrivacyInfo.xcprivacy</code> manifest (Apple 2024+ SDK requirement) declaring all Required Reason APIs used by the app.</p>
+<p>Sensitive data (biometric, encryption keys) is stored exclusively in iOS Keychain, accessible only to the AI Terminal app.</p>
+
+<h2>Android Platform Permissions</h2>
+<ul>
+<li><strong>Camera</strong>: Scan QR code for device pairing.</li>
+<li><strong>Biometric / Fingerprint</strong> (<code>USE_BIOMETRIC</code>): Verify identity for sensitive actions.</li>
+<li><strong>Post Notifications</strong> (Android 13+): Receive task completion alerts via Firebase Cloud Messaging.</li>
+<li><strong>Network State / Internet</strong>: Connect to relay infrastructure.</li>
+<li><strong>Read Media Images</strong> (Android 13+) / Read External Storage (older): Pick photos to send for file transfer.</li>
+</ul>
+<p>Sensitive data is stored in Android Keystore, accessible only to the AI Terminal app.</p>
+
+<h2>iOS In-App Purchases (StoreKit)</h2>
+<p>iOS subscriptions are processed through Apple App Store In-App Purchases (StoreKit). Payment information is collected and processed by Apple and never passes through AI Terminal servers. We only receive subscription status (active / expired / tier) from Apple in order to unlock Pro features. Refunds and cancellations are managed through <em>iPhone Settings → Apple ID → Subscriptions</em>.</p>
+
+<h2>Android In-App Purchases (Google Play Billing)</h2>
+<p>Android subscriptions are processed through Google Play Billing. Payment information is collected by Google and never passes through AI Terminal servers. We only receive subscription status from Google.</p>
+
+<h2>Relay Infrastructure</h2>
+<p>AI Terminal operates 4 relay PoPs (Beijing / Hong Kong / US-West / EU on Hetzner) to route encrypted WebSocket traffic between your desktop daemon and mobile app. Relay servers:</p>
+<ul>
+<li><strong>Do not decrypt</strong> your session content (end-to-end encryption between daemon and app)</li>
+<li><strong>Do not log</strong> session content or commands</li>
+<li><strong>Do log</strong> connection metadata (timestamp, region, bandwidth) for at most 30 days, used solely for service reliability monitoring</li>
+</ul>
+<p>If your desktop and phone are on the same Wi-Fi network, AI Terminal automatically switches to LAN-direct mode (relay is bypassed entirely).</p>
 
 <h2>Third-Party Services</h2>
-<table>
-<tr><th>Service</th><th>Purpose</th><th>Their Privacy Policy</th></tr>
-<tr><td>Google Play Services / FCM</td><td>Push notifications</td><td><a href="https://policies.google.com/privacy">policies.google.com/privacy</a></td></tr>
-<tr><td>Google Play Billing</td><td>Subscription payment</td><td>Same as above</td></tr>
-<tr><td>Cronet (Chromium net stack)</td><td>HTTP client</td><td>Local code library, no independent service</td></tr>
-</table>
-
-<h2>Data Retention</h2>
 <ul>
-<li>Device ID + public key: Records on relay server are auto-cleaned within 90 days after you delete the app.</li>
-<li>Local data (SharedPreferences / file cache): Deleted when you uninstall the app.</li>
-<li>FCM token: Auto-invalidated by Google when you uninstall.</li>
+<li><strong>Apple App Store / Google Play Store</strong>: For app distribution. Standard Apple / Google privacy practices apply to download metadata.</li>
+<li><strong>Firebase Cloud Messaging (Android)</strong>: For push notifications, if you opt-in. Notification payload is minimal (e.g. "AI task complete") and contains no session content.</li>
+<li><strong>APNs (iOS)</strong>: For push notifications, same minimal payload principle.</li>
+<li><strong>Self-hosted GlitchTip (Sentry-compatible)</strong>: For crash reports, if you opt-in. Reports include stack traces and device model, but no session content.</li>
 </ul>
 
-<h2>Children's Privacy</h2>
-<p>This app is not intended for children under 13. We do not knowingly collect data from children.</p>
-
-<h2>Your Rights</h2>
+<h2>Your Data Control Rights</h2>
 <ul>
-<li><strong>Access</strong>: View your device ID in the app's "Manage Devices" page.</li>
-<li><strong>Delete</strong>: Uninstalling the app clears local data; contact us (email) to remove records on the relay server.</li>
-<li><strong>Decline</strong>: You may deny any permission, but features (e.g. QR pairing, file transfer) will be unavailable.</li>
+<li><strong>Unpair Device</strong>: In-app <em>Manage Devices</em> → unpair. Server-side <code>device_id</code> and <code>pairing_token</code> are deleted immediately.</li>
+<li><strong>Delete All My Data (GDPR / CCPA)</strong>: Email <a href="mailto:contact@ai-terminal.org">contact@ai-terminal.org</a>. Processed within 30 days, including unpairing all devices and erasing relay-side records.</li>
+<li><strong>Data Portability (GDPR)</strong>: Request a copy of your data via the same email. Provided within 30 days in a machine-readable format.</li>
+<li><strong>Withdraw Consent</strong>: Telemetry / Crash Reports can be disabled any time in <em>Settings → Privacy</em>.</li>
+</ul>
+<p><strong>Data Retention:</strong> <code>device_id</code> + <code>pairing_token</code> are deleted immediately when you unpair. Relay connection logs are retained for at most 30 days then auto-purged. Crash reports retained for at most 90 days.</p>
+
+<h2>Children's Privacy (COPPA)</h2>
+<p>AI Terminal is not intended for use by children under 13. We do not knowingly collect data from children under 13. If we become aware that a user is under 13, we will delete their data immediately.</p>
+
+<h2>Closed Beta Disclosure</h2>
+<p>AI Terminal is currently in closed beta. During beta:</p>
+<ul>
+<li>The app and infrastructure are under active development</li>
+<li>Service availability is not guaranteed</li>
+<li>Beta testers receive permanent Pro access in exchange for feedback</li>
+<li>You can opt out of beta at any time — your data is deleted within 30 days</li>
 </ul>
 
 <h2>Policy Updates</h2>
-<p>This policy may be updated. Significant changes will be notified in-app. Continued use after updates implies consent.</p>
+<p>We will notify users of material changes via in-app notification at least 7 days before they take effect. The current version of this policy is always available at <a href="https://ai-terminal.org/privacy.html">ai-terminal.org/privacy.html</a>.</p>
 
 <h2>Contact</h2>
-<p>For questions or data requests: <a href="mailto:contact@ai-terminal.org">contact@ai-terminal.org</a></p>
+<ul>
+<li>General: <a href="mailto:contact@ai-terminal.org">contact@ai-terminal.org</a></li>
+<li>Data protection / privacy: same email, subject "Privacy Request"</li>
+<li>In-app feedback: <em>Settings → Feedback</em></li>
+</ul>
+
+<p class="muted">© 2026 AI Terminal. All rights reserved.</p>
 
 </body>
 </html>
